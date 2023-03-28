@@ -49,37 +49,37 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 // Route::middleware(['auth:sanctum'])->group(function () {
 
-    //Module
-    Route::controller(ModuleController::class)->prefix('module')->group(function () {
-        Route::get('list', 'list');
-        Route::post('create', 'create');
-        Route::post('update/{id}', 'update');
-        Route::get('delete/{id}', 'delete');
-        Route::get('show/{id}', 'show');
-    });
+//Module
+Route::controller(ModuleController::class)->prefix('module')->group(function () {
+    Route::get('list', 'list');
+    Route::post('create', 'create');
+    Route::post('update/{id}', 'update');
+    Route::get('delete/{id}', 'delete');
+    Route::get('show/{id}', 'show');
+});
 
-    //Permission
-    Route::controller(PermissionController::class)->prefix('permission')->group(function () {
-        Route::get('list', 'list');
-        Route::post('create', 'create');
-        Route::post('update/{id}', 'update');
-        Route::get('delete/{id}', 'delete');
-        Route::get('show/{id}', 'show');
-    });
+//Permission
+Route::controller(PermissionController::class)->prefix('permission')->group(function () {
+    Route::get('list', 'list');
+    Route::post('create', 'create');
+    Route::post('update/{id}', 'update');
+    Route::get('delete/{id}', 'delete');
+    Route::get('show/{id}', 'show');
+});
 
-    //Role
-    Route::controller(RoleController::class)->prefix('role')->group(function () {
-        Route::get('list', 'list');
-        Route::post('create', 'create');
-        Route::post('update/{id}', 'update');
-        Route::get('delete/{id}', 'delete');
-        Route::get('show/{id}', 'show');
-    });
+//Role
+Route::controller(RoleController::class)->prefix('role')->group(function () {
+    Route::get('list', 'list');
+    Route::post('create', 'create');
+    Route::post('update/{id}', 'update');
+    Route::get('delete/{id}', 'delete');
+    Route::get('show/{id}', 'show');
+});
 
-    //Module Permission
-    Route::controller(ModulePermissionController::class)->prefix('module-permission')->group(function () {
-        Route::post('create', 'create');
-        Route::post('update/{id}','update');
-        Route::get('delete/{id}','delete');
-    });
+//Module Permission
+Route::controller(ModulePermissionController::class)->prefix('module-permission')->group(function () {
+    Route::post('create', 'create');
+    Route::post('update/{id}', 'update');
+    Route::get('delete/{id}', 'delete');
+});
 // });
