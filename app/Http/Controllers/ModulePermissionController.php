@@ -42,6 +42,12 @@ class ModulePermissionController extends Controller
         return ok('Module Permission Updated Successfully');
     }
 
+    public function show($id)
+    {
+        $modulePermission = ModulePermission::find($id);
+        return ok('Module Permisssion',$modulePermission);
+    }
+
     public function delete($id)
     {
         ModulePermission::find($id)->delete();
