@@ -25,7 +25,7 @@ class RoleController extends Controller
         ]);
 
         if ($validation->fails())
-            return error('Validation Error', $validation->errors(), 'Validation');
+            return error('Validation Error', $validation->errors(), 'validation');
 
         $role = Role::create($request->only(['name', 'description']));
 
@@ -47,7 +47,7 @@ class RoleController extends Controller
         ]);
 
         if ($validation->fails())
-            return error('Validation Error', $validation->errors(), 'Validation');
+            return error('Validation Error', $validation->errors(), 'validation');
 
         $role->update($request->only(['name','description']));
 

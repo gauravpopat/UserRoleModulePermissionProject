@@ -25,7 +25,7 @@ class UserController extends Controller
         ]);
 
         if($validation->fails())
-            return error('Validation Error', $validation->errors(), 'Validation');
+            return error('Validation Error', $validation->errors(), 'validation');
 
         $user = User::find(auth()->user()->id);
         $user->roles()->sync($request->role);

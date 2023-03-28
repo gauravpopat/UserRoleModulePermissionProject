@@ -65,7 +65,7 @@ class AuthController extends Controller
         ]);
 
         if ($validation->fails())
-            return error('Validation Error', $validation->errors(), 'Validation');
+            return error('Validation Error', $validation->errors(), 'validation');
 
         $user = User::where('email', $request->email)->first();
 
@@ -89,7 +89,7 @@ class AuthController extends Controller
         ]);
 
         if ($validation->fails())
-            return error('Validation Error', $validation->errors(), 'Validation');
+            return error('Validation Error', $validation->errors(), 'validation');
 
         $user = User::where('email', $request->email)->first();
         $token = Str::random(64);
@@ -121,7 +121,7 @@ class AuthController extends Controller
         ]);
 
         if ($validation->fails())
-            return error('Validation Error', $validation->errors(), 'Validation');
+            return error('Validation Error', $validation->errors(), 'validation');
 
         $passwordreset = PasswordResetToken::where('email', $request->email)->first();
         if ($passwordreset->expired_at > Carbon::now()) {

@@ -20,7 +20,7 @@ class ModulePermissionController extends Controller
         ]);
 
         if ($validation->fails())
-            return error('Validation Error', $validation->errors(), 'Validation');
+            return error('Validation Error', $validation->errors(), 'validation');
 
         ModulePermission::create($request->all());
         return ok('Module Permissions Added');
@@ -35,7 +35,7 @@ class ModulePermissionController extends Controller
             'delete_access' =>  'required|in:1,0'
         ]);
         if ($validation->fails())
-            return error('Validation Error', $validation->errors(), 'Validation');
+            return error('Validation Error', $validation->errors(), 'validation');
 
         $modulePermission = ModulePermission::find($id);
         $modulePermission->update($request->all());

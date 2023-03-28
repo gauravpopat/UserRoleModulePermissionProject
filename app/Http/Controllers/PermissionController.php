@@ -24,7 +24,7 @@ class PermissionController extends Controller
         ]);
 
         if ($validation->fails())
-            return error('Validation Error', $validation->errors(), 'Validation');
+            return error('Validation Error', $validation->errors(), 'validation');
 
         $permission = Permission::create($request->only(['name', 'description']));
 
@@ -42,7 +42,7 @@ class PermissionController extends Controller
         ]);
 
         if ($validation->fails())
-            return error('Validation Error', $validation->errors(), 'Validation');
+            return error('Validation Error', $validation->errors(), 'validation');
 
         $permission->update($request->all());
 

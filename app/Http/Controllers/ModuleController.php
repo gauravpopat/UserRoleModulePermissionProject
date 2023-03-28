@@ -24,7 +24,7 @@ class ModuleController extends Controller
         ]);
 
         if ($validation->fails())
-            return error('Validation Error', $validation->errors(), 'Validation');
+            return error('Validation Error', $validation->errors(), 'validation');
 
         $module = Module::create($request->only(['name', 'description']));
         return ok('Module Added', $module);
@@ -41,7 +41,7 @@ class ModuleController extends Controller
         ]);
 
         if ($validation->fails())
-            return error('Validation Error', $validation->errors(), 'Validation');
+            return error('Validation Error', $validation->errors(), 'validation');
 
         $module->update($request->all());
 
