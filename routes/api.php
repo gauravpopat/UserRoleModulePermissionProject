@@ -42,8 +42,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::controller(UserController::class)->prefix('user')->group(function () {
         Route::get('profile', 'list'); // User and their roles
         Route::post('update', 'update'); // Update user roles
-        Route::get('delete', 'delete'); // Delete user and their roles
         Route::get('show', 'show'); // Show only user detail
+        Route::get('delete', 'delete'); // Delete user and their roles
     });
 });
 
@@ -54,8 +54,8 @@ Route::controller(ModuleController::class)->prefix('module')->group(function () 
     Route::get('list', 'list');
     Route::post('create', 'create');
     Route::post('update/{id}', 'update');
-    Route::get('delete/{id}', 'delete');
     Route::get('show/{id}', 'show');
+    Route::get('delete/{id}', 'delete');
 });
 
 //Permission
@@ -63,8 +63,8 @@ Route::controller(PermissionController::class)->prefix('permission')->group(func
     Route::get('list', 'list');
     Route::post('create', 'create');
     Route::post('update/{id}', 'update');
-    Route::get('delete/{id}', 'delete');
     Route::get('show/{id}', 'show');
+    Route::get('delete/{id}', 'delete');
 });
 
 //Role
@@ -72,14 +72,15 @@ Route::controller(RoleController::class)->prefix('role')->group(function () {
     Route::get('list', 'list');
     Route::post('create', 'create');
     Route::post('update/{id}', 'update');
-    Route::get('delete/{id}', 'delete');
     Route::get('show/{id}', 'show');
+    Route::get('delete/{id}', 'delete');
 });
 
 //Module Permission
 Route::controller(ModulePermissionController::class)->prefix('module-permission')->group(function () {
     Route::post('create', 'create');
     Route::post('update/{id}', 'update');
+    Route::get('show/{id}', 'show');
     Route::get('delete/{id}', 'delete');
 });
 // });
