@@ -29,10 +29,10 @@ class RoleController extends Controller
 
         $role = Role::create($request->only(['name', 'description']));
 
-        //insert record in permission_roles
+        //Give permission to the role.
         $role->permissions()->attach($request->permission_id);
 
-        return ok('Role Created Successfully.', $role);
+        return ok('Role Created Successfully', $role);
     }
 
     //Update role
