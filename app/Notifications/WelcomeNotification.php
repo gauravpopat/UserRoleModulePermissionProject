@@ -36,7 +36,7 @@ class WelcomeNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('Welcome,')
+                    ->line('Welcome '.$this->user['name'].',')
                     ->action('Click here for email verification', url('api/verify-email/'.$this->user['email_verification_code']))
                     ->line('Thank you for using our application!');
     }
