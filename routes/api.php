@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\ModulePermissionController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use App\Models\ModulePermission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -83,4 +85,31 @@ Route::controller(ModulePermissionController::class)->prefix('module-permission'
     Route::get('show/{id}', 'show');
     Route::get('delete/{id}', 'delete');
 });
+
+
+//Blog Module
+Route::controller(BlogController::class)->prefix('blog')->group(function(){
+    Route::post('create','returnResponse');
+    Route::post('update','returnResponse');
+    Route::get('show','returnResponse');
+    Route::get('delete','returnResponse');
+});
+
+//Employee Module
+Route::controller(EmployeeController::class)->prefix('employee')->group(function(){
+    Route::post('create','returnResponse');
+    Route::post('update','returnResponse');
+    Route::get('show','returnResponse');
+    Route::get('delete','returnResponse');
+});
+
+//Employee Module
+Route::controller(CourseController::class)->prefix('course')->group(function(){
+    Route::post('create','returnResponse');
+    Route::post('update','returnResponse');
+    Route::get('show','returnResponse');
+    Route::get('delete','returnResponse');
+});
+
+
 // });
