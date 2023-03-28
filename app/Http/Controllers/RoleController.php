@@ -42,21 +42,26 @@ class RoleController extends Controller
 
         $validation = Validator::make($request->all(), [
             'name'          => 'required|unique:roles,name,' . $role->id,
-            'description'   => 'required'
+            'description'   => 'required',
+            'permission_id' => 'required|array|distinct|exists:permissions,id'
         ]);
 
         if ($validation->fails())
             return error('Validation Error', $validation->errors(), 'Validation');
 
-        $role->update($request->all());
-        
+        $role->update($request->only(['name','description']));
+
+        $role->permissions->sync($request->permission_id);
+    
         return ok('Role Updated Successfully');
     }
 
     //Delete role
     public function delete($id)
     {
-        Role::find($id)->delete();
+        $role = Role::find($id);
+        $role->permissions->detach();
+        $role->delete();
         return ok('Role Deleted Successfully.');
     }
 
