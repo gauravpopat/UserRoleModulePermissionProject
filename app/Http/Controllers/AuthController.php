@@ -71,13 +71,13 @@ class AuthController extends Controller
         if ($user->is_verified == true) {
 
             if (Auth::attempt(['email'   =>  $request->email, 'password'   =>  $request->password])) {
-                $token = $user->createToken("API Login Token")->plainTextToken; //generate token (sanctum)
+                $token = $user->createToken("API Login Token")->plainTextToken; // generated token (sanctum)
                 return ok('Login Successfully', $token);
             } else {
                 return error('Incorrect Password!');
             }
         } else {
-            return error('Email not verified!'); //if is_verified false
+            return error('Email not verified!'); // is_verified false
         }
     }
 
@@ -123,15 +123,15 @@ class AuthController extends Controller
             return error('Validation Error', $validation->errors(), 'validation');
 
         $passwordreset = PasswordResetToken::where('email', $request->email)->first();
-        if ($passwordreset->expired_at > Carbon::now()) {
+        if ($passwordreset->expired_at > Carbon::now()) { // if token is not expired
             $user = User::where('email', $request->email)->first();
             $user->update([
                 'password'  =>  Hash::make($request->password)
             ]);
-            $passwordreset->delete();
+            $passwordreset->delete(); // delete that token record
             return ok('Password Changed Successfully');
         } else {
-            return error('Token Expired');
+            return error('Token Expired'); // if token is expired
         }
     }
 }
