@@ -25,6 +25,7 @@ class hasAccess
 
         if ($user->hasAccess($module_code, $access)) { // => user.php->hasAccess()
             return $next($request);
+            //return response($user->hasAccess($module_code, $access));
         } else {
             return error('Access denied...');
         };
