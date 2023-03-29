@@ -50,23 +50,20 @@ class User extends Authenticatable
 
     public function roles()
     {
-        return $this->belongsToMany(Role::class,'user_roles','user_id','role_id');
+        return $this->belongsToMany(Role::class, 'user_roles', 'user_id', 'role_id');
     }
 
     public function permissions()
     {
-        return $this->hasManyThrough(RolePermission::class,UserRole::class,'user_id','role_id');
+        return $this->hasManyThrough(RolePermission::class, UserRole::class, 'user_id', 'role_id');
     }
 
     public function hasAccess($module_code, $access)
     {
-        foreach($this->roles as $role)
-        {
-            if($role->hasAccess($module_code, $access)){
+        foreach ($this->roles as $role) {
+            if ($role->hasAccess($module_code, $access)) { // =>role.php->hasAccess()
                 return true;
-            }
-            else
-            {
+            } else {
                 return false;
             }
         }

@@ -25,14 +25,10 @@ class Permission extends Model
     {
         foreach ($this->modules as $module) {
 
-
-            //     return true;
-            // }
-            // return false;
-
             $module->where('name', $module_code)->where($access, true)->first(); {
                 return true;
             }
+            
             return false;
 
             // if(strtolower($module->name) == strtolower($module_name)){

@@ -14,16 +14,19 @@ class hasAccess
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public $module_name,$access_name;
+
+    //module_code -> module_name & $access -> (c,r,u,d)access
+    public $module_name, $access_name;
 
     public function handle(Request $request, Closure $next, $module_code, $access): Response
     {
+        //Get auth User.
         $user = Auth::user();
-        // return response($user);
 
-        if($user->hasAccess($module_code,$access)){
-            return $next($request); 
+        if ($user->hasAccess($module_code, $access)) { // => user.php->hasAccess()
+            return $next($request);
+        } else {
+            return error('Access denied...');
         };
-        return error('Access denied...');
     }
 }
