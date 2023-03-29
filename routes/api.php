@@ -1,15 +1,14 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\BlogController;
-use App\Http\Controllers\CourseController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\ModulePermissionController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,12 +22,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-//--USER--//
-
 //Auth
 Route::controller(AuthController::class)->group(function () {
     Route::post('create', 'create');    //Create User
@@ -37,19 +30,6 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('forgot-password-link', 'forgotPasswordLink'); // Reset Password Mail Link
     Route::post('reset-password', 'resetPassword'); // Reset password
 });
-
-//User-Profile
-
-Route::middleware(['auth:sanctum'])->group(function () {
-    Route::controller(UserController::class)->prefix('user')->group(function () {
-        Route::get('profile', 'list'); // User and their roles
-        Route::post('update', 'update'); // Update user roles
-        Route::get('show', 'show'); // Show only user detail
-        Route::get('delete', 'delete'); // Delete user and their roles
-    });
-});
-
-// Route::middleware(['auth:sanctum'])->group(function () {
 
 //Module
 Route::controller(ModuleController::class)->prefix('module')->group(function () {
@@ -86,30 +66,41 @@ Route::controller(ModulePermissionController::class)->prefix('module-permission'
     Route::get('delete/{id}', 'delete');
 });
 
+Route::middleware('auth:sanctum')->group(function () {
 
-//Blog Module
-Route::controller(BlogController::class)->prefix('blog')->group(function(){
-    Route::post('create','returnResponse');
-    Route::post('update','returnResponse');
-    Route::get('show','returnResponse');
-    Route::get('delete','returnResponse');
+    //User Profile
+    Route::controller(UserController::class)->prefix('user')->group(function () {
+        Route::get('profile', 'list'); // User and their roles
+        Route::post('update', 'update'); // Update user roles
+        Route::get('show', 'show'); // Show only user detail
+        Route::get('delete', 'delete'); // Delete user and their roles
+    });
+
+    //Middleware
+    //Company Module
+    Route::controller(CompanyController::class)->prefix('company')->group(function () {
+        Route::post('list', 'list')->middleware(['hasAccess:company,list_access']);
+        Route::post('create', 'create')->middleware(['hasAccess:company,create_access']);
+        Route::post('update', 'update')->middleware(['hasAccess:company,update_access']);
+        Route::get('show', 'show')->middleware(['hasAccess:company,show_access']);
+        Route::get('delete', 'delete')->middleware(['hasAccess:company,delete_access']);
+    });
+
+    //Project Module
+    Route::controller(ProjectController::class)->prefix('project')->group(function () {
+        Route::post('list', 'list')->middleware(['hasAccess:project,list_access']);
+        Route::post('create', 'create')->middleware(['hasAccess:project,create_access']);
+        Route::post('update', 'update')->middleware(['hasAccess:project,update_access']);
+        Route::get('show', 'show')->middleware(['hasAccess:project,show_access']);
+        Route::get('delete', 'delete')->middleware(['hasAccess:project,delete_access']);
+    });
+
+    //Employee Module
+    Route::controller(EmployeeController::class)->prefix('employee')->group(function () {
+        Route::post('list', 'list')->middleware(['hasAccess:employee,list_access']);
+        Route::post('create', 'create')->middleware(['hasAccess:employee,create_access']);
+        Route::post('update', 'update')->middleware(['hasAccess:employee,update_access']);
+        Route::get('show', 'show')->middleware(['hasAccess:employee,show_access']);
+        Route::get('delete', 'delete')->middleware(['hasAccess:employee,delete_access']);
+    });
 });
-
-//Employee Module
-Route::controller(EmployeeController::class)->prefix('employee')->group(function(){
-    Route::post('create','returnResponse');
-    Route::post('update','returnResponse');
-    Route::get('show','returnResponse');
-    Route::get('delete','returnResponse');
-});
-
-//Employee Module
-Route::controller(CourseController::class)->prefix('course')->group(function(){
-    Route::post('create','returnResponse');
-    Route::post('update','returnResponse');
-    Route::get('show','returnResponse');
-    Route::get('delete','returnResponse');
-});
-
-
-// });
