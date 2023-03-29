@@ -46,8 +46,8 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $exception) {
             // only create entries if app environment is not local
-            // if(!app()->environment('local'))
-            // {
+            if(!app()->environment('local'))
+            {
                 $user_id = 0;
  
  
@@ -65,7 +65,7 @@ class Handler extends ExceptionHandler
                 );
                
                 Error::create($data);
-            // }
+            }
         });
  
  
