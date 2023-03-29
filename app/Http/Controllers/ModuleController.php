@@ -19,7 +19,7 @@ class ModuleController extends Controller
     public function create(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'name'          => 'required|unique:modules,name',
+            'name'          => 'required|unique:modules,name|max:50',
             'description'   => 'required'
         ]);
 
@@ -36,7 +36,7 @@ class ModuleController extends Controller
         $module = Module::find($id);
 
         $validation = Validator::make($request->all(), [
-            'name'          => 'required|unique:modules,name,' . $module->id,
+            'name'          => 'required|max:50|unique:modules,name,' . $module->id,
             'description'   => 'required'
         ]);
 
@@ -54,7 +54,7 @@ class ModuleController extends Controller
         $module = Module::find($id);
 
         $module->permissions()->detach();
-        
+
         $module->delete();
         return ok('Module Deleted Successfully');
     }
