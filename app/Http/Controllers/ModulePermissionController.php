@@ -13,7 +13,8 @@ class ModulePermissionController extends Controller
         $validation = Validator::make($request->all(), [
             'permission_id'     => 'required|exists:permissions,id',
             'module_id'         => 'required|exists:modules,id',
-            'view_access'       => 'required|in:1,0',
+            'list_access'   =>  'required|in:1,0',
+            'show_access'   =>  'required|in:1,0',
             'create_access'     => 'required|in:1,0',
             'update_access'     => 'required|in:1,0',
             'delete_access'     => 'required|in:1,0',
@@ -29,7 +30,8 @@ class ModulePermissionController extends Controller
     public function update($id, Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'view_access'   =>  'required|in:1,0',
+            'list_access'   =>  'required|in:1,0',
+            'show_access'   =>  'required|in:1,0',
             'create_access' =>  'required|in:1,0',
             'update_access' =>  'required|in:1,0',
             'delete_access' =>  'required|in:1,0'
