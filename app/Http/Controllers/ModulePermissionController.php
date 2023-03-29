@@ -37,8 +37,7 @@ class ModulePermissionController extends Controller
         if ($validation->fails())
             return error('Validation Error', $validation->errors(), 'validation');
 
-        $modulePermission = ModulePermission::find($id);
-        $modulePermission->update($request->all());
+        ModulePermission::find($id)->update($request->all());
         return ok('Module Permission Updated Successfully');
     }
 
