@@ -19,7 +19,7 @@ class RoleController extends Controller
     public function create(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'name'              => 'required|unique:roles,name',
+            'name'              => 'required|max:50|unique:roles,name',
             'description'       => 'required',
             'permission_id'     => 'required|array|distinct|exists:permissions,id'
         ]);
@@ -41,7 +41,7 @@ class RoleController extends Controller
         $role = Role::find($id);
 
         $validation = Validator::make($request->all(), [
-            'name'          => 'required|unique:roles,name,' . $role->id,
+            'name'          => 'required|max:50|unique:roles,name,' . $role->id,
             'description'   => 'required',
             'permission_id' => 'required|array|distinct|exists:permissions,id'
         ]);
@@ -63,7 +63,7 @@ class RoleController extends Controller
         $role->permissions->detach();
         $role->delete();
         return ok('Role Deleted Successfully.');
-    }
+    }  
 
     //Show particular role
     public function show($id)
