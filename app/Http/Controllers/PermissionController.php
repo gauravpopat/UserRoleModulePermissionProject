@@ -19,7 +19,7 @@ class PermissionController extends Controller
     public function create(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'name'          => 'required|unique:permissions,name',
+            'name'          => 'required|max:50|unique:permissions,name',
             'description'   => 'required'
         ]);
 
@@ -37,7 +37,7 @@ class PermissionController extends Controller
         $permission = Permission::find($id);
 
         $validation = Validator::make($request->all(), [
-            'name'          => 'required|unique:permissions,name,' . $permission->id,
+            'name'          => 'required|max:50|unique:permissions,name,' . $permission->id,
             'description'   => 'required'
         ]);
 
