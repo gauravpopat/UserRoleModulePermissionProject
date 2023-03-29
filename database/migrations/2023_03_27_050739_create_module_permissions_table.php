@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('module_id');
             $table->unsignedBigInteger('permission_id');
-            $table->boolean('view_access')->default(false);
+            $table->boolean('list_access')->default(false);
+            $table->boolean('show_access')->default(false);
             $table->boolean('create_access')->default(false);
             $table->boolean('update_access')->default(false);
             $table->boolean('delete_access')->default(false);
