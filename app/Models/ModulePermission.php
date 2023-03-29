@@ -15,6 +15,7 @@ class ModulePermission extends Model
         'view_access',
         'create_access',
         'update_access',
-        'delete_access'
+        'delete_access',
+        'list_access'
     ];
 }
