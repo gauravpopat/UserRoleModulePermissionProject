@@ -42,7 +42,7 @@ class UserController extends Controller
     //Logout the user
     public function logout()
     {
-        auth()->user()->currentAccessToken()->delete();
+        auth()->user()->currentAccessToken()->delete(); //delete the token
         return ok('You have been logout.');
     }
 
