@@ -25,7 +25,7 @@ class Role extends Model
         foreach ($this->permissions as $permission) {
             if ($permission->hasAccess($module_code, $access)) { // =>permission.php -> hasAccess()
                 return true;
-            }else{
+            } else {
                 return false;
             }
         }
