@@ -33,7 +33,7 @@ class ModuleController extends Controller
     //Update module by ID
     public function update($id, Request $request)
     {
-        $module = Module::find($id);
+        $module = Module::findOrFail($id);
 
         $validation = Validator::make($request->all(), [
             'name'          => 'required|max:50|unique:modules,name,' . $module->id,
@@ -51,7 +51,7 @@ class ModuleController extends Controller
     //Delete module by ID
     public function delete($id)
     {
-        $module = Module::find($id);
+        $module = Module::findOrFail($id);
 
         $module->permissions()->detach();
 
@@ -62,7 +62,7 @@ class ModuleController extends Controller
     //Show particular module
     public function show($id)
     {
-        $module = Module::find($id);
+        $module = Module::findOrFail($id);
         return ok('Module detail', $module);
     }
 }

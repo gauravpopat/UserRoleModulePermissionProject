@@ -39,19 +39,19 @@ class ModulePermissionController extends Controller
         if ($validation->fails())
             return error('Validation Error', $validation->errors(), 'validation');
 
-        ModulePermission::find($id)->update($request->all());
+        ModulePermission::findOrFail($id)->update($request->all());
         return ok('Module Permission Updated Successfully');
     }
 
     public function show($id)
     {
-        $modulePermission = ModulePermission::find($id);
+        $modulePermission = ModulePermission::findOrFail($id);
         return ok('Module Permisssion',$modulePermission);
     }
 
     public function delete($id)
     {
-        ModulePermission::find($id)->delete();
+        ModulePermission::findOrFail($id)->delete();
         return ok('Module Permission Deleted');
     }
 }

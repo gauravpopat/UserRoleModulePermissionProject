@@ -36,7 +36,7 @@ class CompanyController extends Controller
     //Update company by id
     public function update($id, Request $request)
     {
-        $company = Company::find($id);
+        $company = Company::findOrFail($id);
         $validation = Validator::make($request->all(), [
             'name'      => 'required',
             'location'  => 'required',
@@ -54,14 +54,14 @@ class CompanyController extends Controller
     //Show Company
     public function show($id)
     {
-        $company = Company::find($id);
+        $company = Company::findOrFail($id);
         return ok('Company', $company);
     }
 
     //Delete company
     public function delete($id)
     {
-        Company::find($id)->delete();
+        Company::findOrFail($id)->delete();
         return ok('Company Deleted Successfully');
     }
 }

@@ -38,7 +38,7 @@ class RoleController extends Controller
     //Update role
     public function update($id, Request $request)
     {
-        $role = Role::find($id);
+        $role = Role::findOrFail($id);
 
         $validation = Validator::make($request->all(), [
             'name'          => 'required|max:50|unique:roles,name,' . $role->id,
@@ -59,7 +59,7 @@ class RoleController extends Controller
     //Delete role
     public function delete($id)
     {
-        $role = Role::find($id);
+        $role = Role::findOrFail($id);
         $role->permissions->detach();
         $role->delete();
         return ok('Role Deleted Successfully.');
@@ -68,7 +68,7 @@ class RoleController extends Controller
     //Show particular role
     public function show($id)
     {
-        $role = Role::find($id);
+        $role = Role::findOrFail($id);
         return ok('Role detail', $role);
     }
 }

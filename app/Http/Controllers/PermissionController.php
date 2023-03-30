@@ -34,7 +34,7 @@ class PermissionController extends Controller
     //Update permission by ID
     public function update($id, Request $request)
     {
-        $permission = Permission::find($id);
+        $permission = Permission::findOrFail($id);
 
         $validation = Validator::make($request->all(), [
             'name'          => 'required|max:50|unique:permissions,name,' . $permission->id,
@@ -52,7 +52,7 @@ class PermissionController extends Controller
     //Delete permission by ID
     public function delete($id)
     {
-        $permission = Permission::find($id);
+        $permission = Permission::findOrFail($id);
 
         $permission->roles()->detach();
         $permission->modules()->detach();
@@ -64,7 +64,7 @@ class PermissionController extends Controller
     //Show particular permission
     public function show($id)
     {
-        $permission = Permission::find($id);
+        $permission = Permission::findOrFail($id);
         return ok('Permission detail', $permission);
     }
 }
