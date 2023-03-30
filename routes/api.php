@@ -82,7 +82,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('list', 'list')->middleware(['hasAccess:company,list_access']);
         Route::post('create', 'create')->middleware(['hasAccess:company,create_access']);
         Route::post('update', 'update')->middleware(['hasAccess:company,update_access']);
-        Route::get('show', 'show')->middleware(['hasAccess:company,show_access']);
+        Route::get('show/{id}', 'show')->middleware(['hasAccess:company,show_access']);
         Route::get('delete', 'delete')->middleware(['hasAccess:company,delete_access']);
     });
 
@@ -91,7 +91,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('list', 'list')->middleware(['hasAccess:project,list_access']);
         Route::post('create', 'create')->middleware(['hasAccess:project,create_access']);
         Route::post('update', 'update')->middleware(['hasAccess:project,update_access']);
-        Route::get('show', 'show')->middleware(['hasAccess:project,show_access']);
+        Route::get('show/{id}', 'show')->middleware(['hasAccess:project,show_access']);
         Route::get('delete', 'delete')->middleware(['hasAccess:project,delete_access']);
     });
 
@@ -100,7 +100,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('list', 'list')->middleware(['hasAccess:employee,list_access']);
         Route::post('create', 'create')->middleware(['hasAccess:employee,create_access']);
         Route::post('update', 'update')->middleware(['hasAccess:employee,update_access']);
-        Route::get('show', 'show')->middleware(['hasAccess:employee,show_access']);
+        Route::get('show/{id}', 'show')->middleware(['hasAccess:employee,show_access']);
         Route::get('delete', 'delete')->middleware(['hasAccess:employee,delete_access']);
     });
 });
