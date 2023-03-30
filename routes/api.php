@@ -22,6 +22,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// app\http\middleware\authenticate.php
+Route::get('unauthenticated', function () {
+    return error('Unauthenticated', 'Token not found', 'unauthenticated');
+})->name('unauthenticated');
+
+
 //Auth
 Route::controller(AuthController::class)->group(function () {
     Route::post('create', 'create');    //Create User
