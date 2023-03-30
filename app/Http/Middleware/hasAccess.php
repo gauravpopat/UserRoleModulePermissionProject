@@ -22,12 +22,11 @@ class hasAccess
     {
         //Get auth User.
         $user = Auth::user();
-
         if ($user->hasAccess($module_code, $access)) { // => user.php->hasAccess()
             return $next($request);
-            //return response($user->hasAccess($module_code, $access));
-        } else {
+        }else{
             return error('Access denied...');
-        };
+        }
+        
     }
 }
