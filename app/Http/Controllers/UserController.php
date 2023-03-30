@@ -39,6 +39,13 @@ class UserController extends Controller
         return ok('User', $user);
     }
 
+    //Logout the user
+    public function logout()
+    {
+        auth()->user()->currentAccessToken()->delete();
+        return ok('You have been logout.');
+    }
+
     //Delete the user with roles
     public function delete($id)
     {
