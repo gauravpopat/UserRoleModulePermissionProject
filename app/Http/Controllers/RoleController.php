@@ -21,9 +21,6 @@ class RoleController extends Controller
             'users' => $data['query']->get(),
             'count' => $data['count']
         ]);
-
-        // $roles = Role::all()->load('permissions');
-        // return ok('Roles', $roles);
     }
 
     //Create role
@@ -79,7 +76,7 @@ class RoleController extends Controller
     //Show particular role
     public function show($id)
     {
-        $role = Role::findOrFail($id);
+        $role = Role::findOrFail($id)->load('permissions');
         return ok('Role detail', $role);
     }
 }

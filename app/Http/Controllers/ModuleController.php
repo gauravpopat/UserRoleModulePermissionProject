@@ -11,8 +11,14 @@ class ModuleController extends Controller
     //Module list
     public function list()
     {
-        $modules = Module::all()->load('permissions');
-        return ok('Modules with permissions', $modules);
+        $this->ListingValidation();
+        $query = Module::query();
+        $searchable_fields = ['name'];
+        $data = $this->filterSearchPagination($query, $searchable_fields);
+        return ok('User Data', [
+            'users' => $data['query']->get(),
+            'count' => $data['count']
+        ]);
     }
 
     //Create module
@@ -62,7 +68,7 @@ class ModuleController extends Controller
     //Show particular module
     public function show($id)
     {
-        $module = Module::findOrFail($id);
+        $module = Module::findOrFail($id)->load('permissions');
         return ok('Module detail', $module);
     }
 }

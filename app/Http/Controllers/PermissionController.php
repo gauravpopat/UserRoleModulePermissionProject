@@ -11,8 +11,14 @@ class PermissionController extends Controller
     //permission list
     public function list()
     {
-        $permissions = Permission::all()->load('roles', 'modules');
-        return ok('Permissions', $permissions);
+        $this->ListingValidation();
+        $query = Permission::query();
+        $searchable_fields = ['name'];
+        $data = $this->filterSearchPagination($query, $searchable_fields);
+        return ok('User Data', [
+            'users' => $data['query']->get(),
+            'count' => $data['count']
+        ]);
     }
 
     //Create permission
@@ -64,7 +70,7 @@ class PermissionController extends Controller
     //Show particular permission
     public function show($id)
     {
-        $permission = Permission::findOrFail($id);
+        $permission = Permission::findOrFail($id)->load('roles','modules');
         return ok('Permission detail', $permission);
     }
 }

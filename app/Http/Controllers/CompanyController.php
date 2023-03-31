@@ -12,8 +12,14 @@ class CompanyController extends Controller
     //list of companies
     public function list()
     {
-        $companies = Company::all();
-        return ok('Companies', $companies);
+        $this->ListingValidation();
+        $query = Company::query();
+        $searchable_fields = ['name','type','location'];
+        $data = $this->filterSearchPagination($query, $searchable_fields);
+        return ok('User Data', [
+            'users' => $data['query']->get(),
+            'count' => $data['count']
+        ]);
     }
 
     //create company
