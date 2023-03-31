@@ -9,14 +9,6 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-
-    //User with roles
-    public function list()
-    {
-        $user = User::findOrFail(auth()->user()->id)->load('roles', 'permissions');
-        return ok('User', $user);
-    }
-
     //Update the user role
     public function update(Request $request)
     {
@@ -35,7 +27,7 @@ class UserController extends Controller
     //Show only user detail
     public function show()
     {
-        $user = User::findOrFail(auth()->user()->id);
+        $user = User::findOrFail(auth()->user()->id)->load('roles', 'permissions');
         return ok('User', $user);
     }
 
