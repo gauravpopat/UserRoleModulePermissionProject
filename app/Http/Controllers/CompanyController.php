@@ -22,12 +22,12 @@ class CompanyController extends Controller
         ]);
     }
 
-    //create company
+    //Create Company
     public function create(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'name'      => 'required',
-            'location'  => 'required',
+            'name'      => 'required|max:50|unique:companies,name',
+            'location'  => 'required|max:50',
             'is_active' => 'in:1,0',
             'type'      => 'required|in:it,non-it'
         ]);
@@ -44,7 +44,7 @@ class CompanyController extends Controller
     {
         $company = Company::findOrFail($id);
         $validation = Validator::make($request->all(), [
-            'name'      => 'required',
+            'name'      => 'required|max:50|unique:companies,name,'.$company->id,
             'location'  => 'required',
             'is_active' => 'in:1,0',
             'type'      => 'required|in:it,non-it'
