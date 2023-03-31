@@ -58,12 +58,11 @@ class PermissionController extends Controller
     //Delete permission by ID
     public function delete($id)
     {
-        $permission = Permission::findOrFail($id);
+        $permission = Permission::findOrFail($id); // Find the permission.
+        $permission->roles()->detach(); // Detach the roles of that permission.
+        $permission->modules()->detach(); // Detach the modules of that permission. 
+        $permission->delete(); // Delete the permission.
 
-        $permission->roles()->detach();
-        $permission->modules()->detach();
-
-        $permission->delete();
         return ok('Permission Deleted Successfully');
     }
 
