@@ -12,7 +12,7 @@ class ModulePermission extends Model
     protected $fillable = [
         'permission_id',
         'module_id',
-        'view_access',
+        'show_access',
         'create_access',
         'update_access',
         'delete_access',
