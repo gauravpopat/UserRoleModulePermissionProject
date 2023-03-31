@@ -22,7 +22,7 @@ class AuthController extends Controller
         $validation = Validator::make($request->all(), [
             'name'                  => 'required|max:50',
             'email'                 => 'required|email|max:50|unique:users,email',
-            'password'              => 'required|min:8|confirmed',
+            'password'              => 'required|min:8|max:15|confirmed',
             'password_confirmation' => 'required',
             'role_id'               => 'required|array|exists:roles,id'
         ]);
@@ -47,10 +47,14 @@ class AuthController extends Controller
     {
         $user = User::where('email_verification_code', $verification_code)->first();
 
+        if (!$user) {
+            return error('Token Expired');
+        }
+
         $user->update([
             'is_verified'               => true,
             'email_verified_at'         => now(),
-            'email_verification_code'   => null //code null after verification.
+            'email_verification_code'   => null // code null after verification.
         ]);
 
         return ok('Email Verified Successfully');
@@ -115,23 +119,23 @@ class AuthController extends Controller
         $validation = Validator::make($request->all(), [
             'email'                 => 'required|email|exists:password_reset_tokens,email|exists:users,email',
             'token'                 => 'required|exists:password_reset_tokens,token',
-            'password'              => 'required|min:8|confirmed',
+            'password'              => 'required|min:8|max:15|confirmed',
             'password_confirmation' => 'required'
         ]);
 
         if ($validation->fails())
             return error('Validation Error', $validation->errors(), 'validation');
 
-        $passwordreset = PasswordResetToken::where('email', $request->email)->first();
-        if ($passwordreset->expired_at > Carbon::now()) { // if token is not expired
+        $passwordReset = PasswordResetToken::where('email', $request->email)->first();
+        if ($passwordReset->expired_at > Carbon::now()) { // if token is not expired
             $user = User::where('email', $request->email)->first();
             $user->update([
                 'password'  =>  Hash::make($request->password)
             ]);
-            $passwordreset->delete(); // delete that token record
+            $passwordReset->delete(); // delete that token record
             return ok('Password Changed Successfully');
         } else {
-            return error('Token Expired'); // if token is expired
+            return error('Token Expired'); // if expired_date < now()
         }
     }
 }
