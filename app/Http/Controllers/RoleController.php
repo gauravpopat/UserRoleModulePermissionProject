@@ -5,14 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Traits\ListingApiTrait;
 
 class RoleController extends Controller
 {
+    use ListingApiTrait;
     //List of roles
     public function list()
     {
-        $roles = Role::all()->load('permissions','users');
-        return ok('Roles', $roles);
+        $this->ListingValidation();
+        $query = Role::query();
+        $searchable_fields = ['name'];
+        $data = $this->filterSearchPagination($query, $searchable_fields);
+        return ok('User Data', [
+            'users' => $data['query']->get(),
+            'count' => $data['count']
+        ]);
+
+        // $roles = Role::all()->load('permissions');
+        // return ok('Roles', $roles);
     }
 
     //Create role
@@ -49,10 +60,10 @@ class RoleController extends Controller
         if ($validation->fails())
             return error('Validation Error', $validation->errors(), 'validation');
 
-        $role->update($request->only(['name','description']));
+        $role->update($request->only(['name', 'description']));
 
         $role->permissions->sync($request->permission_id);
-    
+
         return ok('Role Updated Successfully');
     }
 
@@ -63,7 +74,7 @@ class RoleController extends Controller
         $role->permissions->detach();
         $role->delete();
         return ok('Role Deleted Successfully.');
-    }  
+    }
 
     //Show particular role
     public function show($id)

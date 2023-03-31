@@ -27,6 +27,7 @@ trait ListingApiTrait
         if (request()->only_trashed) {
             $query = $query->onlyTrashed();
         }
+
         /* Search with searchable fields */
         if (request()->search) {
             $search = request()->search;
