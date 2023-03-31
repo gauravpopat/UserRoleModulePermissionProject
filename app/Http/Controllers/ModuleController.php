@@ -57,11 +57,9 @@ class ModuleController extends Controller
     //Delete module by ID
     public function delete($id)
     {
-        $module = Module::findOrFail($id);
-
-        $module->permissions()->detach();
-
-        $module->delete();
+        $module = Module::findOrFail($id); //find the module
+        $module->permissions()->detach(); // detach the permissions of that module
+        $module->delete(); //delete the module
         return ok('Module Deleted Successfully');
     }
 
