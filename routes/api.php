@@ -67,9 +67,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     //User Profile
     Route::controller(UserController::class)->prefix('user')->group(function () {
-        Route::get('list', 'list'); // User and their roles
         Route::post('update', 'update'); // Update user roles
-        Route::get('show', 'show'); // Show only user detail
+        Route::get('show', 'show'); // User with roles.
         Route::get('logout', 'logout'); // Logout the user.
         Route::get('delete', 'delete'); // Delete user and their roles
     });
