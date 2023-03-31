@@ -26,15 +26,14 @@ class Permission extends Model
     public function hasAccess($module_code, $access)
     {
         foreach ($this->modules as $module) {
-            if ($module->where('name', $module_code)) {
-                if ($module->pivot->$access == true) {
+            $getModule = $module->where('name', $module_code)->first();
+            if ($getModule) {
+                $getAccess =  $module->pivot->where('module_id', $getModule->id)->where('permission_id', $this->id)->where($access, true)->first();
+                if ($getAccess) {
                     return true;
-                } else {
-                    return false;
                 }
-            } else {
-                return false;
             }
         }
+        return false;
     }
 }
