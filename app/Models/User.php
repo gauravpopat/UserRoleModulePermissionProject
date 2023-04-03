@@ -58,9 +58,8 @@ class User extends Authenticatable
         foreach ($this->roles as $role) {
             if ($role->hasAccess($module_code, $access)) { // =>role.php->hasAccess()
                 return true;
-            } else {
-                return false;
             }
         }
+        return false;
     }
 }
