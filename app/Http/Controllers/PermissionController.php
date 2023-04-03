@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Traits\ListingApiTrait;
 
 class PermissionController extends Controller
 {
+    use ListingApiTrait;
     //permission list
     public function list()
     {

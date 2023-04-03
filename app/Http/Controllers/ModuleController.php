@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Module;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Traits\ListingApiTrait;
 
 class ModuleController extends Controller
 {
+    use ListingApiTrait;
     //Module list
     public function list()
     {

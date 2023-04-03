@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
-use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Traits\ListingApiTrait;
 
 class CompanyController extends Controller
 {
+    use ListingApiTrait;
     //list of companies
     public function list()
     {
