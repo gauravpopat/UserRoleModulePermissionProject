@@ -27,7 +27,7 @@ class UserController extends Controller
     //Show only user detail
     public function show()
     {
-        $user = User::findOrFail(auth()->user()->id)->load('roles', 'permissions');
+        $user = User::findOrFail(auth()->user()->id)->load('roles');
         return ok('User', $user);
     }
 
