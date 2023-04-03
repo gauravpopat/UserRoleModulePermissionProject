@@ -36,7 +36,7 @@ class UserController extends Controller
     {
         $validation = Validator::make($request->all(), [
             'old_password'          => 'required',
-            'password'          => 'required|min:8|max:15|confirmed',
+            'password'              => 'required|min:8|max:15|confirmed',
             'password_confirmation' => 'required'
         ]);
 
