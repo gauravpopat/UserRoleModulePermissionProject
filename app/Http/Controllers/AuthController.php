@@ -126,9 +126,9 @@ class AuthController extends Controller
         if ($validation->fails())
             return error('Validation Error', $validation->errors(), 'validation');
 
-        $passwordReset = PasswordResetToken::where('email', $request->email)->first();
+        $passwordReset = PasswordResetToken::where('token', $request->token)->first();
         if ($passwordReset->expired_at > Carbon::now()) { // if token is not expired
-            $user = User::where('email', $request->email)->first();
+            $user = User::where('email', $passwordReset->email)->first();
             $user->update([
                 'password'  =>  Hash::make($request->password)
             ]);
