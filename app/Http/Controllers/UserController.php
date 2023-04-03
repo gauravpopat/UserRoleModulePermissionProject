@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -28,6 +29,28 @@ class UserController extends Controller
     {
         $user = User::findOrFail(auth()->user()->id)->load('roles', 'permissions');
         return ok('User', $user);
+    }
+
+    //Change The Password.
+    public function changePassword(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'old_password'          => 'required',
+            'password'          => 'required|min:8|max:15|confirmed',
+            'password_confirmation' => 'required'
+        ]);
+
+        if ($validation->fails())
+            return error('Validation Error', $validation->errors(), 'validation');
+
+        $user = User::where('id', auth()->user()->id)->first();
+        if (Hash::check($request->old_password, $user->password)) {
+            $user->update([
+                'password'  => Hash::make($request->password)
+            ]);
+            return ok('Password Changed Successfully');
+        }
+        return ok('Old Password Does Not Matched');
     }
 
     //Logout the user
