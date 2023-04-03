@@ -40,7 +40,7 @@ class AuthController extends Controller
         // Welcome Notification with Email Verification Link.
         $user->notify(new WelcomeNotification($user));
 
-        return ok('User Created Successfully and Sent Email Verification Mail.', $user);
+        return ok('User Created Successfully and Sent Mail for Verification', $user);
     }
 
     public function verifyEmail($verification_code)
@@ -106,10 +106,8 @@ class AuthController extends Controller
             ]
         );
 
-        $user['token']  = $token;
-
         //Notification for resetting password.
-        $user->notify(new ResetPasswordNotification($user));
+        $user->notify(new ResetPasswordNotification($token));
 
         return ok('Mail Sent for Reset Passoword!');
     }

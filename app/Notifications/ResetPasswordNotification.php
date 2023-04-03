@@ -10,14 +10,14 @@ use Illuminate\Notifications\Notification;
 class ResetPasswordNotification extends Notification
 {
     use Queueable;
-    public $user;
+    public $token;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($user)
+    public function __construct($token)
     {
-        $this->user = $user;
+        $this->token = $token;
     }
 
     /**
@@ -37,7 +37,7 @@ class ResetPasswordNotification extends Notification
     {
         return (new MailMessage)
                     ->line('Reset Code.')
-                    ->line($this->user['token'])
+                    ->line($this->token)
                     ->line('Thank you for using our application!');
     }
 
