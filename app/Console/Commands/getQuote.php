@@ -32,7 +32,7 @@ class getQuote extends Command
             "3"     =>  "In order to be irreplaceable, one must always be different",
             "4"     =>  "Java is to JavaScript what car is to Carpet.",
             "5"     =>  "Knowledge is power.",
-            "6"     =>  "Sometimes it pays to stay in bed on Monday, rather than spending the rest of the week debugging Monday’s code.",
+            "6"     =>  "Sometimes it pays to stay in bed on Monday, rather than spending the rest of the week debugging Monday's code.",
             "7"     =>  "Perfection is achieved not when there is nothing more to add, but rather when there is nothing more to take away.",
             "8"     =>  "Ruby is rubbish! PHP is phpantastic!",
             "9"     =>  "Code is like humor. When you have to explain it, it's bad.",
