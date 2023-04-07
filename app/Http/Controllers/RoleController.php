@@ -18,7 +18,7 @@ class RoleController extends Controller
         $searchable_fields = ['name'];
         $data = $this->filterSearchPagination($query, $searchable_fields);
         return ok('User Data', [
-            'users' => $data['query']->get(),
+            'roles' => $data['query']->get(),
             'count' => $data['count']
         ]);
     }

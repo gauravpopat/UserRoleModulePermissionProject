@@ -18,8 +18,8 @@ class CompanyController extends Controller
         $searchable_fields = ['name','type','location'];
         $data = $this->filterSearchPagination($query, $searchable_fields);
         return ok('User Data', [
-            'users' => $data['query']->get(),
-            'count' => $data['count']
+            'company'   => $data['query']->get(),
+            'count'     => $data['count']
         ]);
     }
 

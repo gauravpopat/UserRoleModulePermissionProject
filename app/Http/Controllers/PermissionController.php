@@ -18,7 +18,7 @@ class PermissionController extends Controller
         $searchable_fields = ['name'];
         $data = $this->filterSearchPagination($query, $searchable_fields);
         return ok('User Data', [
-            'users' => $data['query']->get(),
+            'permissions' => $data['query']->get(),
             'count' => $data['count']
         ]);
     }
